@@ -42,7 +42,6 @@ class WordCountParser_mysql
     file.each_line do |line|
       words = line.split
       words.each do |word|
-        #word = word.gsub(/[^a-zA-Z0-9-]+/i, "").downcase
         word = word.gsub(/[;.""...,()?!*]+/i, "").downcase
         @connection.query("INSERT INTO #{@table_name} (word, count) VALUES ('#{@connection.escape(word)}', 1) ON DUPLICATE KEY UPDATE count=count+1")
 
