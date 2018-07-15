@@ -4,10 +4,10 @@
 
 require "mysql2"
 class WordCountParser_mysql
-  @@num_of_books = 0
-  @@names = Array.new
 
   def initialize(dir_path)
+    @num_of_books = 0
+    @names = Array.new
     @dir_path = dir_path
     @table_name = '__counts'
     @connection = Mysql2::Client.new(:host => "localhost", :username => "root", :password => "qb5rmuV3", :database => "mydb")
@@ -20,10 +20,10 @@ class WordCountParser_mysql
   def form_dictionary()
     Dir.foreach(@dir_path){|file|
       next if file == '.' or file == '..'
-      @@names << file
-      @@num_of_books +=1
+      @names << file
+      @num_of_books +=1
     }
-    @@names.each { |x| index_one(x) }
+    @names.each { |x| index_one(x) }
   end
 
 
